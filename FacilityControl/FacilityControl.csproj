@@ -7,8 +7,8 @@
     <ProjectGuid>{BE3D5B78-1302-4AED-A8F4-3002F14AF9B0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DoorControl</RootNamespace>
-    <AssemblyName>DoorControl</AssemblyName>
+    <RootNamespace>FacilityControl</RootNamespace>
+    <AssemblyName>FacilityControl</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -32,6 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="0Harmony, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\EXILED References\0Harmony.dll</HintPath>
+    </Reference>
     <Reference Include="Assembly-CSharp-firstpass">
       <HintPath>..\..\EXILED References\Assembly-CSharp-firstpass.dll</HintPath>
     </Reference>
@@ -70,17 +74,34 @@
     <Reference Include="UnityEngine">
       <HintPath>..\..\EXILED References\UnityEngine.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.AnimationModule">
+      <HintPath>..\..\EXILED References\UnityEngine.AnimationModule.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>..\..\EXILED References\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API.cs" />
     <Compile Include="Commands\BlackoutZone.cs" />
+    <Compile Include="Commands\BlastDoors.cs" />
     <Compile Include="Commands\CloseZone.cs" />
+    <Compile Include="Commands\ForceRespawn.cs" />
+    <Compile Include="Commands\KillClassZone.cs" />
+    <Compile Include="Commands\NoInteractDoors.cs" />
+    <Compile Include="Commands\DestroyDoor.cs" />
+    <Compile Include="Commands\Escaping.cs" />
+    <Compile Include="Commands\KillZone.cs" />
     <Compile Include="Commands\LockZone.cs" />
+    <Compile Include="Commands\Isolate.cs" />
+    <Compile Include="Commands\NukeElevator.cs" />
+    <Compile Include="Commands\StartDecontamination.cs" />
+    <Compile Include="Commands\ToggleTeslas.cs" />
     <Compile Include="Config.cs" />
-    <Compile Include="DoorControl.cs" />
+    <Compile Include="Patches\EscapePatch.cs" />
+    <Compile Include="FacilityControl.cs" />
     <Compile Include="EventHandlers.cs" />
+    <Compile Include="Patches\Scp079LockdownPatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
