@@ -17,7 +17,7 @@ namespace FacilityControl.Commands
     {
         public string Command { get; set; } = "isolate";
 
-        public string[] Aliases { get; set; } = { "isolate" };
+        public string[] Aliases { get; set; } = {  };
 
         public string Description { get; set; } = "Locks the checkpoints & gates of the specified zone for the specified duration. Use \"facility\" in replacement of a zone to lock gate A and B (no checkpoints).";
 
