@@ -1,4 +1,5 @@
-<h1> Commands </h1>
+## Commands
+Players must have the required permission and RA access to run the command.
 | Command                     | Arguments                | Description                                                                                                                                                           | Permission           |
 |-----------------------------|--------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------|
 | blackoutzone / bz           | <zone> <time>            | Blacks out all of the lights in the given zone (doesn't close doors) for the specified time.                                                                          | fctrl.zones          |
