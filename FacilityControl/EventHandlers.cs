@@ -21,6 +21,8 @@ namespace FacilityControl
             {
                 FacilityControl.PlySets[data.Key].Clear();
             }
+
+            // Credit for the original idea behind SCP lockdown goes to AlmightyLks's SCPLockdown plugin, found here: https://github.com/AlmightyLks/SCPLockdown
             foreach (KeyValuePair<RoleType, int> data in FacilityControl.Instance.Config.ScpLockdownPeriod)
             {
                 if (data.Value == 0) continue;

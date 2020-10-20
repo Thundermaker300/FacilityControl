@@ -40,7 +40,7 @@ namespace FacilityControl.Commands
             }
             ZoneType zone = (arguments.At(1).ToLower() == "light" ? ZoneType.LightContainment : (arguments.At(1).ToLower() == "heavy" ? ZoneType.HeavyContainment : (arguments.At(1).ToLower() == "entrance" ? ZoneType.Entrance : (arguments.At(1).ToLower() == "surface" ? ZoneType.Surface : ZoneType.Unspecified))));
             int totalKilled = 0;
-            if (Enum.TryParse(arguments.At(0), out RoleType role))
+            if (!Enum.TryParse(arguments.At(0), true, out RoleType role))
             {
                 response = "Invalid role provided";
                 return false;

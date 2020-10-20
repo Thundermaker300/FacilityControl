@@ -15,6 +15,15 @@ namespace FacilityControl
             {
                 return Player.List.ToList();
             }
+            else if (data.Contains("%"))
+            {
+                string searchFor = data.Remove(0, 1);
+                if (!Enum.TryParse(searchFor, true, out RoleType role))
+                {
+                    return new List<Player> { };
+                }
+                return Player.List.Where(Ply => Ply.Role == role).ToList();
+            }
             else
             {
                 List<Player> returnValue = new List<Player> { };
