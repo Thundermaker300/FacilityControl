@@ -30,5 +30,24 @@ namespace FacilityControl
                 return returnValue;
             }
         }
+
+        public static (bool, bool) GetItemInInventory(Player Ply, ItemType itemType)
+        {
+            if (Ply.Inventory.curItem == itemType)
+            {
+                return (true, true);
+            }
+            else
+            {
+                foreach (Inventory.SyncItemInfo item in Ply.Inventory.items)
+                {
+                    if (item.id == itemType)
+                    {
+                        return (true, false);
+                    }
+                }
+            }
+            return (false, false);
+        }
     }
 }

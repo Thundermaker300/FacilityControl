@@ -111,6 +111,29 @@ namespace FacilityControl
             {
                 ev.IsTriggerable = false;
             }
+            else
+            {
+                bool canDisable = false;
+                foreach (ItemType i in FacilityControl.Instance.Config.TeslaItems)
+                {
+                    (bool hasItem, bool isHolding) = API.GetItemInInventory(ev.Player, i);
+                    if (hasItem)
+                    {
+                        if (FacilityControl.Instance.Config.TeslaHoldItems == true)
+                        {
+                            if (isHolding) canDisable = true;
+                        }
+                        else
+                        {
+                            canDisable = true;
+                        }
+                    }
+                }
+                if (canDisable)
+                {
+                    ev.IsTriggerable = false;
+                }
+            }
         }
 
         public void OnEscaping(EscapingEventArgs ev)

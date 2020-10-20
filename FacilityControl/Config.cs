@@ -15,6 +15,12 @@ namespace FacilityControl
         [Description("If set to true, tesla gates will be disabled if the lights in HCZ are out.")]
         public bool BlackoutTeslasDisabled { get; set; } = true;
 
+        [Description("Determines what items a player can have in their inventory in order to disable tesla gates.")]
+        public List<ItemType> TeslaItems { get; set; } = new List<ItemType> { };
+
+        [Description("If set to true, users must be holding one of the aforementioned items in order to disable tesla gates.")]
+        public bool TeslaHoldItems { get; set; } = true;
+
         [Description("Determines how long SCPs will be locked in their containment chamber before they are allowed to leave. Set to 0 to disable.")]
         public Dictionary<RoleType, int> ScpLockdownPeriod { get; set; } = new Dictionary<RoleType, int>
         {
