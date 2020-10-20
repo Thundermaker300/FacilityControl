@@ -1,4 +1,5 @@
-﻿using Exiled.API.Features;
+﻿using Exiled.API.Enums;
+using Exiled.API.Features;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,16 @@ namespace FacilityControl
                     return new List<Player> { };
                 }
                 return Player.List.Where(Ply => Ply.Role == role).ToList();
+            }
+            else if (data.Contains("*"))
+            {
+                string searchFor = data.Remove(0, 1);
+                ZoneType zone = (searchFor.ToLower() == "light" ? ZoneType.LightContainment : (searchFor.ToLower() == "heavy" ? ZoneType.HeavyContainment : (searchFor.ToLower() == "entrance" ? ZoneType.Entrance : (searchFor.ToLower() == "surface" ? ZoneType.Surface : ZoneType.Unspecified))));
+                if (zone == ZoneType.Unspecified)
+                {
+                    return new List<Player> { };
+                }
+                return Player.List.Where(Ply => Ply.CurrentRoom.Zone == zone).ToList();
             }
             else
             {
