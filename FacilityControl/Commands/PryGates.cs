@@ -12,29 +12,29 @@ using Exiled.API.Features;
 namespace FacilityControl.Commands
 {
     [CommandHandler(typeof(RemoteAdminCommandHandler))]
-    class DestroyDoor : ICommand
+    class PryGates : ICommand
     {
-        public string Command { get; set; } = "destroydoor";
+        public string Command { get; set; } = "prygates";
 
-        public string[] Aliases { get; set; } = { "dd" };
+        public string[] Aliases { get; set; } = { };
 
-        public string Description { get; set; } = "Sets the targeted player to destroy every door they open/close (must have keycard access to do so).";
+        public string Description { get; set; } = "Allows the targeted player to pry open any heavy gate they interact with.";
 
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
-            if (!((CommandSender)sender).CheckPermission("fctrl.destroydoor"))
+            if (!((CommandSender)sender).CheckPermission("fctrl.prygates"))
             {
                 response = "Access denied.";
                 return false;
             }
             if (arguments.Count() < 2)
             {
-                response = "Proper usage: dd (add/remove) (player)";
+                response = "Proper usage: prygates (add/remove) (player)";
                 return false;
             }
             if (arguments.At(0).ToLower() != "add" && arguments.At(0).ToLower() != "remove")
             {
-                response = "Proper usage: dd (add/remove) (player)";
+                response = "Proper usage: prygates (add/remove) (player)";
                 return false;
             }
             List<Player> Plys = API.GetPlayers(arguments.At(1));
@@ -46,14 +46,14 @@ namespace FacilityControl.Commands
             List<Player> Affected = new List<Player> { };
             foreach (Player Ply in Plys)
             {
-                if (arguments.At(0).ToLower() == "add" && !FacilityControl.PlySets["DestroyDoors"].Contains(Ply))
+                if (arguments.At(0).ToLower() == "add" && !FacilityControl.PlySets["PryGates"].Contains(Ply))
                 {
-                    FacilityControl.PlySets["DestroyDoors"].Add(Ply);
+                    FacilityControl.PlySets["PryGates"].Add(Ply);
                     Affected.Add(Ply);
                 }
-                if (arguments.At(0).ToLower() == "remove" && FacilityControl.PlySets["DestroyDoors"].Contains(Ply))
+                if (arguments.At(0).ToLower() == "remove" && FacilityControl.PlySets["PryGates"].Contains(Ply))
                 {
-                    FacilityControl.PlySets["DestroyDoors"].Remove(Ply);
+                    FacilityControl.PlySets["PryGates"].Remove(Ply);
                     Affected.Add(Ply);
                 }
             }

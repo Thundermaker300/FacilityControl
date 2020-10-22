@@ -86,10 +86,11 @@
     <Compile Include="Commands\BlackoutZone.cs" />
     <Compile Include="Commands\BlastDoors.cs" />
     <Compile Include="Commands\CloseZone.cs" />
+    <Compile Include="Commands\DestroyDoor.cs" />
     <Compile Include="Commands\ForceRespawn.cs" />
     <Compile Include="Commands\KillClassZone.cs" />
     <Compile Include="Commands\NoInteractDoors.cs" />
-    <Compile Include="Commands\DestroyDoor.cs" />
+    <Compile Include="Commands\PryGates.cs" />
     <Compile Include="Commands\Escaping.cs" />
     <Compile Include="Commands\KillZone.cs" />
     <Compile Include="Commands\LockZone.cs" />

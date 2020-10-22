@@ -64,21 +64,17 @@ namespace FacilityControl
                 ev.IsAllowed = false;
                 return;
             }
-            if (FacilityControl.PlySets["DestroyDoors"].Contains(ev.Player))
+            if (FacilityControl.PlySets["PryGates"].Contains(ev.Player) && ev.Door.doorType == Door.DoorTypes.HeavyGate)
             {
-                if (ev.Door.doorType == Door.DoorTypes.HeavyGate)
+                ev.IsAllowed = false;
+                ev.Door.PryGate();
+            }
+            else if (FacilityControl.PlySets["DestroyDoors"].Contains(ev.Player) && ev.Door.doorType == Door.DoorTypes.Standard)
+            {
+                if (ev.IsAllowed == true)
                 {
-                    ev.IsAllowed = false;
-                    ev.Door.PryGate();
+                    ev.Door.DestroyDoor(true);
                     return;
-                }
-                else
-                {
-                    if (ev.IsAllowed == true)
-                    {
-                        ev.Door.DestroyDoor(true);
-                        return;
-                    }
                 }
             }
             if (FacilityControl.ScpRoomLockdown.ContainsKey(ev.Player.Role) && FacilityControl.ScpRoomLockdown[ev.Player.Role] == true)

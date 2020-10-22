@@ -29,6 +29,7 @@ namespace FacilityControl
         {
             ["NoInteractDoors"] = new List<Player> { },
             ["DestroyDoors"] = new List<Player> { },
+            ["PryGates"] = new List<Player> { },
         };
 
         public static Dictionary<ZoneType, bool> LightsOut = new Dictionary<ZoneType, bool>
