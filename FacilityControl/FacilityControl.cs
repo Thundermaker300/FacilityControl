@@ -17,7 +17,7 @@ namespace FacilityControl
         public override string Name { get; } = "FacilityControl";
         public override string Author { get; } = "Thunder";
         public override Version Version { get; } = new Version(0, 1, 1);
-        public override Version RequiredExiledVersion { get; } = new Version(2, 1, 6);
+        public override Version RequiredExiledVersion { get; } = new Version(2, 1, 8);
 
         public static FacilityControl Instance;
         private EventHandlers handler = new EventHandlers();
