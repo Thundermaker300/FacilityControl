@@ -21,7 +21,7 @@ namespace FacilityControl
         [Description("If set to true, users must be holding one of the aforementioned items in order to disable tesla gates.")]
         public bool TeslaHoldItems { get; set; } = true;
 
-        [Description("Determines how long SCPs will be locked in their containment chamber before they are allowed to leave. Set to 0 to disable.")]
+        /*[Description("Determines how long SCPs will be locked in their containment chamber before they are allowed to leave. Set to 0 to disable.")]
         public Dictionary<RoleType, int> ScpLockdownPeriod { get; set; } = new Dictionary<RoleType, int>
         {
             [RoleType.Scp049] = 0,
@@ -45,5 +45,6 @@ namespace FacilityControl
 
         [Description("The message to show when SCPs are able to leave their rooms.")]
         public string ScpLockdownLockedMessage { get; set; } = "You cannot leave your containment chamber yet!";
+        */
     }
 }

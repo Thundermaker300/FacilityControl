@@ -27,7 +27,7 @@ namespace FacilityControl
             }
 
             // Credit for the original idea behind SCP lockdown goes to AlmightyLks's SCPLockdown plugin, found here: https://github.com/AlmightyLks/SCPLockdown
-            foreach (KeyValuePair<RoleType, int> data in FacilityControl.Instance.Config.ScpLockdownPeriod)
+            /*foreach (KeyValuePair<RoleType, int> data in FacilityControl.Instance.Config.ScpLockdownPeriod)
             {
                 if (data.Value == 0) continue;
                 FacilityControl.ScpRoomLockdown[data.Key] = true;
@@ -56,7 +56,7 @@ namespace FacilityControl
                         }
                     }
                 });
-            } 
+            } */
         }
 
         // Player Events
@@ -81,14 +81,14 @@ namespace FacilityControl
                     return;
                 }
             }
-            if (FacilityControl.ScpRoomLockdown.ContainsKey(ev.Player.Role) && FacilityControl.ScpRoomLockdown[ev.Player.Role] == true)
+            /*if (FacilityControl.ScpRoomLockdown.ContainsKey(ev.Player.Role) && FacilityControl.ScpRoomLockdown[ev.Player.Role] == true)
             {
                 ev.IsAllowed = false;
                 if (FacilityControl.Instance.Config.ScpLockdownLockedNotif == true)
                 {
                     ev.Player.ShowHint(FacilityControl.Instance.Config.ScpLockdownLockedMessage, 2);
                 }
-            }
+            }*/
         }
 
         public void OnChangingRole(ChangingRoleEventArgs ev)
