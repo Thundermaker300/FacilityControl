@@ -1,6 +1,8 @@
 ﻿using Exiled.API.Enums;
 using Exiled.API.Features;
 using Exiled.Events.EventArgs;
+using Exiled.API.Extensions;
+using Interactables.Interobjects;
 using MEC;
 using System;
 using System.Collections.Generic;
@@ -9,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using Exiled.API.Features.Roles;
 
 namespace FacilityControl
 {
@@ -17,6 +20,7 @@ namespace FacilityControl
         // Server Events
         public void OnRoundStarted()
         {
+            FacilityControl.EscapingDisabled = false;
             foreach (KeyValuePair<string, List<Player>> data in FacilityControl.PlySets)
             {
                 FacilityControl.PlySets[data.Key].Clear();
@@ -33,14 +37,14 @@ namespace FacilityControl
                     List<Player> PlyList = Player.List.Where(P => P.Role == data.Key).ToList();
                     foreach (Player Ply in PlyList)
                     {
-                        if (data.Key == RoleType.Scp079)
+                        if (data.Key == RoleType.Scp079 && Ply.Role is Scp079Role role)
                         {
-                            Ply.ReferenceHub.scp079PlayerScript.maxMana = 100;
-                            Ply.ReferenceHub.scp079PlayerScript.Mana = 100;
+                            role.MaxEnergy = 100f;
+                            role.Energy = 100f;
                         }
                         else if (data.Key == RoleType.Scp106)
                         {
-                            Ply.Position = Map.GetRandomSpawnPoint(RoleType.Scp106);
+                            Ply.Position = RoleType.Scp106.GetRandomSpawnProperties().Item1;
                             Timing.CallDelayed(0.3f, () =>
                             {
                                 Ply.ReferenceHub.scp106PlayerScript.DeletePortal();
@@ -64,16 +68,16 @@ namespace FacilityControl
                 ev.IsAllowed = false;
                 return;
             }
-            if (FacilityControl.PlySets["PryGates"].Contains(ev.Player) && ev.Door.doorType == Door.DoorTypes.HeavyGate)
+            if (FacilityControl.PlySets["PryGates"].Contains(ev.Player) && ev.Door.Base is PryableDoor)
             {
                 ev.IsAllowed = false;
-                ev.Door.PryGate();
+                ev.Door.TryPryOpen();
             }
-            else if (FacilityControl.PlySets["DestroyDoors"].Contains(ev.Player) && ev.Door.doorType == Door.DoorTypes.Standard)
+            else if (FacilityControl.PlySets["DestroyDoors"].Contains(ev.Player) && ev.Door.Base is BreakableDoor)
             {
                 if (ev.IsAllowed == true)
                 {
-                    ev.Door.DestroyDoor(true);
+                    ev.Door.BreakDoor();
                     return;
                 }
             }
@@ -89,10 +93,10 @@ namespace FacilityControl
 
         public void OnChangingRole(ChangingRoleEventArgs ev)
         {
-            if (ev.NewRole == RoleType.Scp079 && FacilityControl.ScpRoomLockdown[RoleType.Scp079] == true)
+            if (ev.NewRole == RoleType.Scp079 && ev.Player.Role is Scp079Role role && FacilityControl.ScpRoomLockdown[RoleType.Scp079] == true)
             {
-                ev.Player.ReferenceHub.scp079PlayerScript.maxMana = 0;
-                ev.Player.ReferenceHub.scp079PlayerScript.Mana = 0;
+                role.MaxEnergy = 100f;
+                role.Energy = 100f;
             }
             else if (ev.NewRole == RoleType.Scp106 && FacilityControl.ScpRoomLockdown[RoleType.Scp106] == true)
             {

@@ -53,15 +53,15 @@ namespace FacilityControl
 
         public static (bool, bool) GetItemInInventory(Player Ply, ItemType itemType)
         {
-            if (Ply.Inventory.curItem == itemType)
+            if (Ply.CurrentItem.Type == itemType)
             {
                 return (true, true);
             }
             else
             {
-                foreach (Inventory.SyncItemInfo item in Ply.Inventory.items)
+                foreach (var item in Ply.Items)
                 {
-                    if (item.id == itemType)
+                    if (item.Type == itemType)
                     {
                         return (true, false);
                     }

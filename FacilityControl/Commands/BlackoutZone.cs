@@ -49,7 +49,7 @@ namespace FacilityControl.Commands
                 response = "Second argument must be a valid number (duration)";
                 return false;
             }
-            foreach (Room r in Map.Rooms)
+            foreach (Room r in Room.List)
             {
                 if (r.Zone == zone)
                 {

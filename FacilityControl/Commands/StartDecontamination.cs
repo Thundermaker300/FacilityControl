@@ -27,7 +27,7 @@ namespace FacilityControl.Commands
                 response = "Access denied.";
                 return false;
             }
-            if (Map.IsLCZDecontaminated)
+            if (Map.IsLczDecontaminated)
             {
                 response = "Decontamination has already begun.";
                 return false;

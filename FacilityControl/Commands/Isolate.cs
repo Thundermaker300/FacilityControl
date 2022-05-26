@@ -49,32 +49,32 @@ namespace FacilityControl.Commands
                 response = "Second argument must be a valid number (duration)";
                 return false;
             }
-            List<Door> doors = new List<Door> { };
+            IEnumerable<Door> doors = new List<Door>();
             switch (zone)
             {
                 case ZoneType.LightContainment:
-                    doors = Map.Doors.ToList().FindAll(door => door.DoorName == "CHECKPOINT_LCZ_A" || door.DoorName == "CHECKPOINT_LCZ_B");
+                    doors = Door.List.Where(door => door.Nametag == "CHECKPOINT_LCZ_A" || door.Nametag == "CHECKPOINT_LCZ_B");
                     break;
                 case ZoneType.HeavyContainment:
-                    doors = Map.Doors.ToList().FindAll(door => door.DoorName == "CHECKPOINT_LCZ_A" || door.DoorName == "CHECKPOINT_LCZ_B" || door.DoorName == "CHECKPOINT_ENT");
+                    doors = Door.List.Where(door => door.Nametag == "CHECKPOINT_LCZ_A" || door.Nametag == "CHECKPOINT_LCZ_B" || door.Nametag == "CHECKPOINT_EZ_HCZ");
                     break;
                 case ZoneType.Entrance:
-                    doors = Map.Doors.ToList().FindAll(door => door.DoorName == "GATE_A" || door.DoorName == "GATE_B" || door.DoorName == "CHECKPOINT_ENT");
+                    doors = Door.List.Where(door => door.Nametag == "GATE_A" || door.Nametag == "GATE_B" || door.Nametag == "CHECKPOINT_EZ_HCZ");
                     break;
                 case ZoneType.Surface:
-                    doors = Map.Doors.ToList().FindAll(door => door.DoorName == "GATE_A" || door.DoorName == "GATE_B");
+                    doors = Door.List.Where(door => door.Nametag == "GATE_A" || door.Nametag == "GATE_B");
                     break;
             }
             foreach (Door door in doors)
             {
-                door.SetStateWithSound(false);
-                door.SetLock(true);
+                door.IsOpen = false;
+                door.ChangeLock(DoorLockType.AdminCommand);
             }
             Timing.CallDelayed(length, () =>
             {
                 foreach (Door door in doors)
                 {
-                    door.SetLock(false);
+                    door.ChangeLock(DoorLockType.None);
                 }
             });
             response = $"Successfully isolated {(zone == ZoneType.Surface ? "the facility" : zone.ToString())}";

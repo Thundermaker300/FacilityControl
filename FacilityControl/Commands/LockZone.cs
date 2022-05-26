@@ -48,17 +48,17 @@ namespace FacilityControl.Commands
                 response = "Second argument must be a valid number (duration)";
                 return false;
             }
-            foreach (Room r in Map.Rooms)
+            foreach (Room r in Room.List)
             {
                 if (r.Zone == zone)
                 {
                     foreach (Door d in r.Doors)
                     {
-                        d.SetLock(true);
-                        d.SetState(false);
+                        d.IsOpen = false;
+                        d.ChangeLock(DoorLockType.AdminCommand);
                         Timing.CallDelayed(length, () =>
                         {
-                            d.SetLock(false);
+                            d.ChangeLock(DoorLockType.None);
                         });
                     }
                 }

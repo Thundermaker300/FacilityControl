@@ -44,7 +44,7 @@ namespace FacilityControl.Commands
             {
                 if (Ply.CurrentRoom.Zone == zone && !Ply.IsGodModeEnabled)
                 {
-                    Ply.Hurt(99999, DamageTypes.Wall, "ZONEKILL");
+                    Ply.Hurt(99999, "Zone purged");
                     totalKilled++;
                 }
             }

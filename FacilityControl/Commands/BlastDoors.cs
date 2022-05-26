@@ -31,7 +31,7 @@ namespace FacilityControl.Commands
             }
             foreach (BlastDoor bd in UnityEngine.Object.FindObjectsOfType<BlastDoor>())
             {
-                bd.SetClosed(true);
+                bd.SetClosed(false, true);
             }
             response = "Successfully closed blast doors.";
             return true;

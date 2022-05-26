@@ -39,13 +39,13 @@ namespace FacilityControl.Commands
                 return false;
             }
             ZoneType zone = (arguments.At(0).ToLower() == "light" ? ZoneType.LightContainment : (arguments.At(0).ToLower() == "heavy" ? ZoneType.HeavyContainment : (arguments.At(0).ToLower() == "entrance" ? ZoneType.Entrance : ZoneType.Unspecified)));
-            foreach (Room r in Map.Rooms)
+            foreach (Room r in Room.List)
             {
                 if (r.Zone == zone)
                 {
                     foreach (Door d in r.Doors)
                     {
-                        d.SetStateWithSound(false);
+                        d.IsOpen = false;
                     }
                 }
             }
